@@ -1,14 +1,22 @@
+require 'matrix'
+
 class GameBoard
   attr_reader :game_board
+  attr_reader :winner
 
   def initialize
-    @game_board = Array.new(3){Array.new(3)}
-    p @game_board
+    @game_board = Matrix[[nil,nil,nil],[nil,nil,nil],[nil,nil,nil]]
+    #@game_board = Matrix.build(3,3)# .each_with_index do |e, row, col|
+    @winner = false
+  end
+
+  def fill_board
+    @game_board.map { |cell| cell.fill("x") }
   end
 
   def mark(player_choice)
     if player_choice == 1
-      @game_board[0][0] = 1
+      @game_board.column(0)
     elsif player_choice == 2
 
     elsif player_choice == 3
@@ -28,4 +36,14 @@ class GameBoard
     end
   end
 
+  def check
+    @game_board.diagonal
+    #@game_board.each_with_index do |value, row, col |
+      #row
+   #end 
+
+
+  end
 end
+
+
